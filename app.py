@@ -133,8 +133,8 @@ def categorias():
     return render_template('categorias.html')
 
 @app.route('/categorias/roupas')
-def pagina1():
-    return render_template('pagina1.html')
+def roupas():
+    return render_template('roupas.html')
 
 @app.route('/categorias/futebol')
 def pagina2():
