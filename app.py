@@ -115,7 +115,6 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
-    # Limpa o carrinho do usuário específico ao deslogar
     user_cart_key = f'cart_{current_user.id}'
     if user_cart_key in session:
         session.pop(user_cart_key, None)
@@ -137,32 +136,32 @@ def roupas():
     return render_template('roupas.html')
 
 @app.route('/categorias/futebol')
-def pagina2():
-    return render_template('pagina2.html')
+def futebol():
+    return render_template('futebol.html')
 
 @app.route('/categorias/basquete')
-def pagina3():
-    return render_template('pagina3.html')
+def basquete():
+    return render_template('basquete.html')
 
 @app.route('/categorias/volei')
-def pagina4():
-    return render_template('pagina4.html')
+def volei():
+    return render_template('volei.html')
 
 @app.route('/categorias/ciclismo')
-def pagina5():
-    return render_template('pagina5.html')
+def ciclismo():
+    return render_template('ciclismo.html')
 
 @app.route('/categorias/natação')
-def pagina6():
-    return render_template('pagina6.html')
+def natacao():
+    return render_template('natacao.html')
 
 @app.route('/categorias/tacos')
-def pagina7():
-    return render_template('pagina7.html')
+def tacos():
+    return render_template('tacos.html')
 
 @app.route('/categorias/automobilismo')
-def pagina8():
-    return render_template('pagina8.html')
+def auto():
+    return render_template('auto.html')
 
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
