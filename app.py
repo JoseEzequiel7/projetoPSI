@@ -146,9 +146,9 @@ def volei():
 def ciclismo():
     return render_template('ciclismo.html')
 
-@app.route('/categorias/natação')
-def natacao():
-    return render_template('natacao.html')
+@app.route('/categorias/aqua')
+def aqua():
+    return render_template('aqua.html')
 
 @app.route('/categorias/tacos')
 def tacos():
