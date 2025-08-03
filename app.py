@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'uma_chave_secreta_muito_forte_e_aleatoria_aqui'
+app.config['SECRET_KEY'] = 'projeto_romerito'
 app.config['SESSION_COOKIE_SAMESITE'] = "Lax"
 
 login_manager = LoginManager()
@@ -13,7 +13,6 @@ login_manager.login_message = 'Por favor, faça login para acessar esta página.
 login_manager.login_message_category = 'info'
 
 usuarios_db = {}
-
 
 class User(UserMixin):
     def __init__(self, user_id, email, username):
@@ -35,17 +34,13 @@ def load_user(user_id):
 def inject_user():
     return dict(current_user=current_user)
 
-# Inicializa o carrinho na sessão antes de cada requisição
 @app.before_request
 def before_request():
-    # Se o usuário não estiver autenticado, não há necessidade de inicializar um carrinho específico de usuário
     if not current_user.is_authenticated:
-        # Garante que um carrinho genérico vazio exista para usuários não logados, se necessário
         if 'cart' not in session:
             session['cart'] = []
         return
 
-    # Para usuários autenticados, usa uma chave de sessão específica para o usuário
     user_cart_key = f'cart_{current_user.id}'
     if user_cart_key not in session:
         session[user_cart_key] = []
