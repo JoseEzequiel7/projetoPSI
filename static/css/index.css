@@ -18,7 +18,7 @@ body {
 /* Estilização do cabeçalho */
 header {
     background-color: lightblue;
-    height: 120px;
+    height: 170px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -65,9 +65,8 @@ header input {
 
 /* Lista abaixo do input */
 .a-input ul {
-    position: absolute;
-    top: 80px;
-    left: 245px;
+    display: flex;
+
     font-size: 15px;
 }
 
@@ -107,9 +106,7 @@ li img {
 
 /* Lista de navegação */
 header ul {
-    position: absolute;
-    top: 80px;
-    left: 1055px;
+    display: flex;
     list-style: none;
     font-family: Arial;
     display: flex;
@@ -134,6 +131,10 @@ footer {
     background-color: #202020;
     color: white;
     margin-top: 230px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 /* Responsividade */
