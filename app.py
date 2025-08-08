@@ -166,11 +166,6 @@ def dashboard():
 def categorias():
     return render_template('categorias.html')
 
-# Rotas de categorias
-@app.route('/categorias/roupas')
-def roupas():
-    return render_template('roupas.html', produtos=produtos)
-
 @app.route('/categorias/futebol')
 def futebol():
     return render_template('futebol.html', produtos=produtos)
@@ -203,6 +198,7 @@ def auto():
 def add_to_cart():
     product_image = request.form.get('product_image')
     product_description = request.form.get('product_description')
+    product_price = request.form.get('product_price') 
 
     if current_user.is_authenticated:
         user_cart_key = f'cart_{current_user.id}'
@@ -210,7 +206,7 @@ def add_to_cart():
         if len(cart) >= 12:
             flash('Limite de 12 produtos no carrinho atingido.', 'warning')
         else:
-            cart.append({'image': product_image, 'description': product_description})
+            cart.append({'image': product_image, 'description': product_description, 'price': product_price})
             session[user_cart_key] = cart
             flash('Produto adicionado ao carrinho!', 'success')
     else:
@@ -218,7 +214,7 @@ def add_to_cart():
         if len(cart) >= 12:
             flash('Limite de 12 produtos no carrinho atingido.', 'warning')
         else:
-            cart.append({'image': product_image, 'description': product_description})
+            cart.append({'image': product_image, 'description': product_description, 'price': product_price})
             session['cart'] = cart
             flash('Produto adicionado ao carrinho! Faça login para salvar seu carrinho.', 'success')
 
@@ -233,6 +229,33 @@ def carrinho():
     else:
         cart_items = session.get('cart', [])
     return render_template('carrinho.html', cart_items=cart_items)
+
+@app.route('/checkout', methods=['POST'])
+def checkout():
+    total_price = 0
+    bought_products = []
+    
+    if current_user.is_authenticated:
+        user_cart_key = f'cart_{current_user.id}'
+        cart_items = session.get(user_cart_key, [])
+        for item in cart_items:
+            price_str = item['price'].replace('R$ ', '').replace(',', '.')
+            total_price += float(price_str)
+            bought_products.append(item)
+        
+        session.pop(user_cart_key, None)
+    else:
+        cart_items = session.get('cart', [])
+        for item in cart_items:
+            price_str = item['price'].replace('R$ ', '').replace(',', '.')
+            total_price += float(price_str)
+            bought_products.append(item)
+            
+        session.pop('cart', None)
+        
+    total_price_formatted = "R$ {:.2f}".format(total_price).replace('.', ',')
+    
+    return render_template('compra_finalizada.html', total_price=total_price_formatted, bought_products=bought_products)
 
 if __name__ == '__main__':
     app.run(debug=True)
