@@ -1,22 +1,48 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+import sqlite3
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'projeto_romerito'
 app.config['SESSION_COOKIE_SAMESITE'] = "Lax"
 
+# Caminho para o banco de dados
+DB_FILE = 'banco.db'
+
+# Configuração do Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 login_manager.login_message = 'Por favor, faça login para acessar esta página.'
 login_manager.login_message_category = 'info'
 
-usuarios_db = {}
+# Função para obter a conexão e criar a tabela se ela não existir
+def get_db_connection():
+    conn = sqlite3.connect(DB_FILE)
+    conn.row_factory = sqlite3.Row  # Permite acessar colunas por nome
+    
+    # Verifica se a tabela 'users' existe, se não, a cria.
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='users';")
+    if not cursor.fetchone():
+        conn.execute('''
+            CREATE TABLE users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL,
+                email TEXT NOT NULL UNIQUE,
+                password_hash TEXT NOT NULL
+            )
+        ''')
+        conn.commit()
+    
+    return conn
 
+# Modelo de Usuário para o Flask-Login
 class User(UserMixin):
-    def __init__(self, user_id, email, username):
-        self.id = user_id
+    def __init__(self, id, email, username):
+        self.id = id
         self.email = email
         self.username = username
 
@@ -25,10 +51,20 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
-    if user_id in usuarios_db:
-        user_data = usuarios_db[user_id]
+    conn = get_db_connection()
+    user_data = conn.execute('SELECT id, email, username FROM users WHERE id = ?', (user_id,)).fetchone()
+    conn.close()
+    if user_data:
         return User(user_data['id'], user_data['email'], user_data['username'])
     return None
+
+# Rotas e lógica do carrinho (mantidas do seu código original)
+produtos = {
+    'roupa_1': {'nome': 'Camisa Esportiva', 'preco': 59.90, 'imagem': 'imagens/roupas/camisa_esportiva.jpg'},
+    'roupa_2': {'nome': 'Shorts de Compressão', 'preco': 79.90, 'imagem': 'imagens/roupas/shorts_compressao.jpg'},
+    'taco_1': {'nome': 'Taco de beisebol', 'preco': 150.00, 'imagem': 'imagens/tacos/taco_beisebol.jpg'},
+    'volei_1': {'nome': 'Bola de vôlei de praia', 'preco': 89.90, 'imagem': 'imagens/volei/bola_volei.jpg'},
+}
 
 @app.context_processor
 def inject_user():
@@ -36,15 +72,13 @@ def inject_user():
 
 @app.before_request
 def before_request():
-    if not current_user.is_authenticated:
+    if current_user.is_authenticated:
+        user_cart_key = f'cart_{current_user.id}'
+        if user_cart_key not in session:
+            session[user_cart_key] = []
+    else:
         if 'cart' not in session:
             session['cart'] = []
-        return
-
-    user_cart_key = f'cart_{current_user.id}'
-    if user_cart_key not in session:
-        session[user_cart_key] = []
-
 
 @app.route('/')
 def index():
@@ -69,13 +103,20 @@ def cadastro():
         if password != confirm_password:
             flash('As senhas não coincidem.', 'danger')
             return render_template('cadastro.html', email=email)
+        
+        conn = get_db_connection()
+        user_existente = conn.execute('SELECT * FROM users WHERE email = ?', (email,)).fetchone()
 
-        if email in usuarios_db:
+        if user_existente:
+            conn.close()
             flash('Este email já está cadastrado. Tente outro ou faça login.', 'danger')
             return render_template('cadastro.html', email=email)
 
         hashed_password = generate_password_hash(password)
-        usuarios_db[email] = {"password_hash": hashed_password, "id": email, "email": email, "username": username}
+        conn.execute('INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)', (username, email, hashed_password))
+        conn.commit()
+        conn.close()
+        
         flash('Cadastro realizado com sucesso! Faça login agora.', 'success')
         return redirect(url_for('login'))
 
@@ -90,21 +131,20 @@ def login():
     if request.method == 'POST':
         email_digitado = request.form.get('email')
         senha_digitada = request.form.get('password')
+        
+        conn = get_db_connection()
+        user_data = conn.execute('SELECT * FROM users WHERE email = ?', (email_digitado,)).fetchone()
+        conn.close()
 
-        if email_digitado in usuarios_db:
-            user_data = usuarios_db[email_digitado]
-            if check_password_hash(user_data['password_hash'], senha_digitada):
-                user = User(user_data['id'], user_data['email'], user_data['username'])
-                login_user(user)
-                flash('Login bem-sucedido!', 'success')
-                return redirect(url_for('dashboard'))
-            else:
-                flash('Email ou senha inválidos.', 'danger')
-                return render_template('login.html', email=email_digitado)
+        if user_data and check_password_hash(user_data['password_hash'], senha_digitada):
+            user = User(user_data['id'], user_data['email'], user_data['username'])
+            login_user(user)
+            flash('Login bem-sucedido!', 'success')
+            return redirect(url_for('dashboard'))
         else:
             flash('Email ou senha inválidos.', 'danger')
             return render_template('login.html', email=email_digitado)
-
+    
     return render_template('login.html')
 
 @app.route('/logout')
@@ -126,37 +166,38 @@ def dashboard():
 def categorias():
     return render_template('categorias.html')
 
+# Rotas de categorias
 @app.route('/categorias/roupas')
 def roupas():
-    return render_template('roupas.html')
+    return render_template('roupas.html', produtos=produtos)
 
 @app.route('/categorias/futebol')
 def futebol():
-    return render_template('futebol.html')
+    return render_template('futebol.html', produtos=produtos)
 
 @app.route('/categorias/basquete')
 def basquete():
-    return render_template('basquete.html')
+    return render_template('basquete.html', produtos=produtos)
 
 @app.route('/categorias/volei')
 def volei():
-    return render_template('volei.html')
+    return render_template('volei.html', produtos=produtos)
 
 @app.route('/categorias/ciclismo')
 def ciclismo():
-    return render_template('ciclismo.html')
+    return render_template('ciclismo.html', produtos=produtos)
 
 @app.route('/categorias/aqua')
 def aqua():
-    return render_template('aqua.html')
+    return render_template('aqua.html', produtos=produtos)
 
 @app.route('/categorias/tacos')
 def tacos():
-    return render_template('tacos.html')
+    return render_template('tacos.html', produtos=produtos)
 
 @app.route('/categorias/automobilismo')
 def auto():
-    return render_template('auto.html')
+    return render_template('auto.html', produtos=produtos)
 
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
@@ -185,7 +226,6 @@ def add_to_cart():
 
 
 @app.route('/carrinho')
-@login_required
 def carrinho():
     if current_user.is_authenticated:
         user_cart_key = f'cart_{current_user.id}'
