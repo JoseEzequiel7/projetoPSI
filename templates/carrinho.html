@@ -56,11 +56,18 @@
                 <div class="cart-card">
                     <img src="{{ item.image }}" alt="{{ item.description }}">
                     <p>{{ item.description }}</p>
-                </div>
+                    <p>{{ item.price }}</p> </div>
                 {% endfor %}
+
             {% else %}
                 <p style="color: white;">Seu carrinho está vazio.</p>
             {% endif %}
+        </div>
+
+        <div class="checkout-section">
+            <form action="{{ url_for('checkout') }}" method="post">
+                <button type="submit" class="checkout-button">Finalizar Compra</button>
+            </form>
         </div>
 
         <footer>
