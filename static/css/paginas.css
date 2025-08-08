@@ -152,6 +152,13 @@ header ul {
     overflow: hidden; /* Previne espaços extras */
 }
 
+.preco {
+    font-size: 18px;
+    color: white; /* Cor de destaque para o preço */
+    font-weight: bold;
+    margin-top: 10px;
+}
+
 /* Texto dentro dos cards */
 .cards p {
     color: white;
