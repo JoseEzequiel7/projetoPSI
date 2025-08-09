@@ -8,22 +8,18 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'projeto_romerito'
 app.config['SESSION_COOKIE_SAMESITE'] = "Lax"
 
-# Caminho para o banco de dados
 DB_FILE = 'banco.db'
 
-# Configuração do Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 login_manager.login_message = 'Por favor, faça login para acessar esta página.'
 login_manager.login_message_category = 'info'
 
-# Função para obter a conexão e criar a tabela se ela não existir
 def get_db_connection():
     conn = sqlite3.connect(DB_FILE)
-    conn.row_factory = sqlite3.Row  # Permite acessar colunas por nome
+    conn.row_factory = sqlite3.Row  
     
-    # Verifica se a tabela 'users' existe, se não, a cria.
     cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='users';")
     if not cursor.fetchone():
@@ -39,7 +35,6 @@ def get_db_connection():
     
     return conn
 
-# Modelo de Usuário para o Flask-Login
 class User(UserMixin):
     def __init__(self, id, email, username):
         self.id = id
@@ -58,13 +53,7 @@ def load_user(user_id):
         return User(user_data['id'], user_data['email'], user_data['username'])
     return None
 
-# Rotas e lógica do carrinho (mantidas do seu código original)
-produtos = {
-    'roupa_1': {'nome': 'Camisa Esportiva', 'preco': 59.90, 'imagem': 'imagens/roupas/camisa_esportiva.jpg'},
-    'roupa_2': {'nome': 'Shorts de Compressão', 'preco': 79.90, 'imagem': 'imagens/roupas/shorts_compressao.jpg'},
-    'taco_1': {'nome': 'Taco de beisebol', 'preco': 150.00, 'imagem': 'imagens/tacos/taco_beisebol.jpg'},
-    'volei_1': {'nome': 'Bola de vôlei de praia', 'preco': 89.90, 'imagem': 'imagens/volei/bola_volei.jpg'},
-}
+produtos = {}
 
 @app.context_processor
 def inject_user():
@@ -195,6 +184,7 @@ def auto():
     return render_template('auto.html', produtos=produtos)
 
 @app.route('/add_to_cart', methods=['POST'])
+@login_required
 def add_to_cart():
     product_image = request.form.get('product_image')
     product_description = request.form.get('product_description')
@@ -220,8 +210,8 @@ def add_to_cart():
 
     return redirect(request.referrer or url_for('index'))
 
-
 @app.route('/carrinho')
+@login_required
 def carrinho():
     if current_user.is_authenticated:
         user_cart_key = f'cart_{current_user.id}'
