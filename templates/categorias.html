@@ -12,27 +12,29 @@
 
     <div class="container">
         <header>
+            <div class="a-foto">
+                <img src="{{url_for('static' , filename = 'imagens/imgs/aorussports.png')}}" alt="Logotipo da Aorus">
+            </div>
             <div class="a-input">
-                <img src="{{url_for('static' , filename = 'imagens/imgs/aorussports.png')}}" alt="Logotipo da Orus">
                 <input type="search" placeholder="Buscar produtos, marcas e muito mais...">
                 <nav>
                     <ul>
                         <li><a href="{{url_for('index')}}">Página inicial</a></li>
+                        <br>
                         <li><a href="{{url_for('categorias')}}">Categorias</a></li>
+                        <br>
                         <li><a href="#">Contato</a></li>
+                        <br>
                         <li><a href="#">Ofertas do dia</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="a-lista">
-                <nav>
-                    <ul>
+                <ul>
                     {# Verifica se o usuário está autenticado #}
                     {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('dashboard') }}">Olá, {{ current_user.username }}</a></li>
-                    <br>
                     <li><a href="{{ url_for('logout') }}">Sair</a></li>
-                    <br>
                     {% else %}
                     <li><a href="{{ url_for('cadastro') }}">Cadastrar-se</a></li>
                     <br>
@@ -40,8 +42,7 @@
                     <br>
                     {% endif %}
                     <li><a href="{{ url_for('carrinho') }}"><img src="{{ url_for('static', filename='imagens/imgs/carrinho.png') }}"  width="30"></a></li>
-                    </ul>
-                </nav>
+                </ul>
             </div>
         </header>
         <div class="sidebar">
