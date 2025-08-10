@@ -47,48 +47,56 @@
 
         <div class="sidebar">
             <div class="cards">
-                <img src="{{ url_for('static', filename='Foto/Foto_seção_de_ação.webp') }}" alt="">
-                <p>ROUPAS</p>
+                <img src="{{ url_for('static', filename='imagens/auto/capacete.jpg') }}" alt="Capacete de Automobilismo">
+                <p>Capacete Senna Bell</p>
+                <div class="preco">R$ 1500,00</div>
                 <center>
                     <form action="{{ url_for('add_to_cart') }}" method="post">
-                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='Foto/Foto_seção_de_ação.webp') }}">
-                        <input type="hidden" name="product_description" value="ROUPAS">
+                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='imagens/auto/capacete.jpg') }}">
+                        <input type="hidden" name="product_description" value="Capacete Senna Bell">
+                        <input type="hidden" name="product_price" value="R$ 1500,00">
                         <button type="submit">Adicionar ao carrinho</button>
                     </form>
                 </center>
             </div>
 
             <div class="cards">
-                <img src="{{ url_for('static', filename='Foto/Foto_seção_de_corrida.webp') }}" alt="">
-                <p>ACESSÓRIOS</p>
+                <img src="{{ url_for('static', filename='imagens/auto/macacao.webp') }}" alt="Macacão de corrida">
+                <p>Macacão de corrida Sparco</p>
+                <div class="preco">R$ 800,00</div>
                 <center>
                     <form action="{{ url_for('add_to_cart') }}" method="post">
-                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='Foto/Foto_seção_de_corrida.webp') }}">
-                        <input type="hidden" name="product_description" value="ACESSÓRIOS">
+                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='imagens/auto/macacao.webp') }}">
+                        <input type="hidden" name="product_description" value="Macacão de corrida Sparco">
+                        <input type="hidden" name="product_price" value="R$ 800,00">
                         <button type="submit">Adicionar ao carrinho</button>
                     </form>
                 </center>
             </div>
 
             <div class="cards">
-                <img src="{{ url_for('static', filename='Foto/Foto_seção_de_basquete.webp') }}" alt="">
-                <p>EQUIPAMENTOS ESPORTIVOS</p>
+                <img src="{{ url_for('static', filename='imagens/auto/volante.png') }}" alt="Volante de corrida">
+                <p>Volante de corrida</p>
+                <div class="preco">R$ 2000,00</div>
                 <center>
                     <form action="{{ url_for('add_to_cart') }}" method="post">
-                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='Foto/Foto_seção_de_basquete.webp') }}">
-                        <input type="hidden" name="product_description" value="EQUIPAMENTOS ESPORTIVOS">
+                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='imagens/auto/volante.png') }}">
+                        <input type="hidden" name="product_description" value="Volante de corrida">
+                        <input type="hidden" name="product_price" value="R$ 2000,00">
                         <button type="submit">Adicionar ao carrinho</button>
                     </form>
                 </center>
             </div>
 
             <div class="cards">
-                <img src="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}" alt="">
-                <p>VÔLEI</p>
+                <img src="{{ url_for('static', filename='imagens/auto/cinto.webp') }}" alt="Cinto de segurança">
+                <p>Cinto de segurança Takatkb</p>
+                <div class="preco">R$ 350,00</div>
                 <center>
                     <form action="{{ url_for('add_to_cart') }}" method="post">
-                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}">
-                        <input type="hidden" name="product_description" value="VÔLEI">
+                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='imagens/auto/cinto.webp') }}">
+                        <input type="hidden" name="product_description" value="Cinto de segurança Takatkb">
+                        <input type="hidden" name="product_price" value="R$ 350,00">
                         <button type="submit">Adicionar ao carrinho</button>
                     </form>
                 </center>
@@ -97,48 +105,56 @@
 
         <div class="sidebar">
             <div class="cards">
-                <img src="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}" alt="">
-                <p>CICLISMO</p>
+                <img src="{{ url_for('static', filename='imagens/auto/luvas.jpg') }}" alt="Luvas de corrida">
+                <p>Luvas de corrida</p>
+                <div class="preco">R$ 120,00</div>
                 <center>
                     <form action="{{ url_for('add_to_cart') }}" method="post">
-                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}">
-                        <input type="hidden" name="product_description" value="CICLISMO">
+                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='imagens/auto/luvas.jpg') }}">
+                        <input type="hidden" name="product_description" value="Luvas de corrida">
+                        <input type="hidden" name="product_price" value="R$ 120,00">
                         <button type="submit">Adicionar ao carrinho</button>
                     </form>
                 </center>
             </div>
 
             <div class="cards">
-                <img src="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}" alt="">
-                <p>NATAÇÃO</p>
+                <img src="{{ url_for('static', filename='imagens/auto/suporte.webp') }}" alt="Suporte de câmera para cabeça">
+                <p>Suporte de câmera para cabeça</p>
+                <div class="preco">R$ 80,00</div>
                 <center>
                     <form action="{{ url_for('add_to_cart') }}" method="post">
-                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}">
-                        <input type="hidden" name="product_description" value="NATAÇÃO">
+                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='imagens/auto/suporte.webp') }}">
+                        <input type="hidden" name="product_description" value="Suporte de câmera para cabeça">
+                        <input type="hidden" name="product_price" value="R$ 80,00">
                         <button type="submit">Adicionar ao carrinho</button>
                     </form>
                 </center>
             </div>
 
             <div class="cards">
-                <img src="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}" alt="">
-                <p>ESPORTES COM TACOS</p>
+                <img src="{{ url_for('static', filename='imagens/auto/relogio.webp') }}" alt="Relógio esportivo">
+                <p>Relógio esportivo</p>
+                <div class="preco">R$ 250,00</div>
                 <center>
                     <form action="{{ url_for('add_to_cart') }}" method="post">
-                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}">
-                        <input type="hidden" name="product_description" value="ESPORTES COM TACOS">
+                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='imagens/auto/relogio.webp') }}">
+                        <input type="hidden" name="product_description" value="Relógio esportivo">
+                        <input type="hidden" name="product_price" value="R$ 250,00">
                         <button type="submit">Adicionar ao carrinho</button>
                     </form>
                 </center>
             </div>
 
             <div class="cards">
-                <img src="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}" alt="">
-                <p>AUTOMOBILISMO</p>
+                <img src="{{ url_for('static', filename='imagens/auto/jaqueta.webp') }}" alt="Jaqueta corta vento">
+                <p>Jaqueta corta vento Mizuno</p>
+                <div class="preco">R$ 220,00</div>
                 <center>
                     <form action="{{ url_for('add_to_cart') }}" method="post">
-                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='Foto/Foto_seção_de_luta.webp') }}">
-                        <input type="hidden" name="product_description" value="AUTOMOBILISMO">
+                        <input type="hidden" name="product_image" value="{{ url_for('static', filename='imagens/auto/jaqueta.webp') }}">
+                        <input type="hidden" name="product_description" value="Jaqueta corta vento Mizuno">
+                        <input type="hidden" name="product_price" value="R$ 220,00">
                         <button type="submit">Adicionar ao carrinho</button>
                     </form>
                 </center>
