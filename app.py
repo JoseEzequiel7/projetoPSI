@@ -220,6 +220,29 @@ def carrinho():
         cart_items = session.get('cart', [])
     return render_template('carrinho.html', cart_items=cart_items)
 
+@app.route('/remove_from_cart/<int:item_index>', methods=['POST'])
+@login_required
+def remove_from_cart(item_index):
+    if current_user.is_authenticated:
+        user_cart_key = f'cart_{current_user.id}'
+        cart = session.get(user_cart_key, [])
+        if 0 <= item_index < len(cart):
+            cart.pop(item_index)
+            session[user_cart_key] = cart
+            flash('Produto removido do carrinho.', 'success')
+        else:
+            flash('Erro ao remover o produto.', 'danger')
+    else:
+        cart = session.get('cart', [])
+        if 0 <= item_index < len(cart):
+            cart.pop(item_index)
+            session['cart'] = cart
+            flash('Produto removido do carrinho.', 'success')
+        else:
+            flash('Erro ao remover o produto.', 'danger')
+
+    return redirect(url_for('carrinho'))
+
 @app.route('/checkout', methods=['POST'])
 def checkout():
     total_price = 0
