@@ -7,6 +7,12 @@
 
     <link rel="stylesheet" href="{{url_for ('static', filename = 'css/carrinho.css')}}">
 
+    <style>
+        a {
+            color: wheat;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -52,16 +58,21 @@
 
         <div class="cart-items">
             {% if cart_items %}
-                {% for item in cart_items %}
-                <div class="cart-card">
-                    <img src="{{ item.image }}" alt="{{ item.description }}">
-                    <p>{{ item.description }}</p>
-                    <p>{{ item.price }}</p> </div>
-                {% endfor %}
-
-            {% else %}
-                <p style="color: white;">Seu carrinho está vazio.</p>
-            {% endif %}
+            {% for item in cart_items %}
+            <div class="cart-card">
+                <img src="{{ item.image }}" alt="{{ item.description }}">
+                <p>{{ item.description }}</p>
+                <p>{{ item.price }}</p>
+                <form action="{{ url_for('remove_from_cart', item_index=loop.index0) }}" method="post" style="display:inline;">
+                    <button type="submit" class="remove-button">X</button>
+                </form>
+        
+            </div>
+        {% endfor %}
+    
+        {% else %}
+        <p style="color: white;">Seu carrinho está vazio.</p>
+        {% endif %}
         </div>
 
         <div class="checkout-section">
