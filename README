@@ -28,7 +28,7 @@ FUNCIONALIDADES:
 
 COMO EXECUTAR O PROJETO:
     Crie o Ambiente Virtual:
-        python -m venv venv
+        python -m venv env
 
     Ative o Ambiente Virtual:
         Em windows: venv\Scripts\Activate
