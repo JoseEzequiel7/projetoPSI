@@ -71,7 +71,10 @@ def before_request():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    rendered_template = render_template('index.html')
+    response = make_response(rendered_template)    
+    response.headers['X-Custom-Header'] = 'Aorus Store'
+    return response
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
@@ -272,3 +275,4 @@ def checkout():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
