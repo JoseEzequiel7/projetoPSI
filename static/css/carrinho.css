@@ -18,7 +18,7 @@ body {
 /* Estilização do cabeçalho */
 header {
     background-color: lightblue;
-    height: 120px;
+    height: 170px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -30,28 +30,32 @@ header a {
     cursor: pointer;
 }
 
+/* Estilização da logo */
+.a-foto img {
+    height: 200px;
+}
+
 .a-lista li :hover {
     text-decoration: underline;
     opacity: 0.8;
 }
 
+
 .a-input li :hover {
+    display: flex;
+    flex-direction: column;
     text-decoration: underline;
     opacity: 0.6;
 }
 
-/* Área do input e logo */
+/* Área do input */
 .a-input {
     display: flex;
     width: 40%;
     flex-grow: 1;
     align-items: center;
-    justify-content: space-between;
-}
-
-/* Estilização da logo */
-.a-input img {
-    height: 200px;
+    flex-direction: column;
+    position: relative;
 }
 
 /* Barra de pesquisa */
@@ -59,15 +63,19 @@ header input {
     height: 30px;
     width: 550px;
     padding: 20px;
+    margin: 5px;
     color: gray;
+    height: 50px;
+    width: 60%;
 }
 
 /* Lista abaixo do input */
 .a-input ul {
-    position: absolute;
-    top: 80px;
-    left: 245px;
+    display: flex;
     font-size: 15px;
+    position: absolute;
+    bottom: -100%;
+    left: 25%;
 }
 
 /* Itens da lista */
@@ -78,10 +86,8 @@ header input {
 /* Área da lista de ícones no cabeçalho */
 .a-lista {
     display: flex;
-    flex-grow: 1;
     justify-content: flex-end;
     cursor: pointer;
-    flex-direction: column;
     align-items: flex-end;
 }
 
@@ -98,17 +104,10 @@ li img {
     height: 20px;
 }
 
-/* Efeito hover na lista */
-.a-lista li:hover {
-    text-decoration: underline;
-    opacity: 0.6;
-}
 
 /* Lista de navegação */
 header ul {
-    position: absolute;
-    top: 80px;
-    left: 1055px;
+    display: flex;
     list-style: none;
     font-family: Arial;
     display: flex;
@@ -176,6 +175,20 @@ header ul {
     padding: 20px;
 }
 
+.checkout-section {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente (se houver altura) */
+    margin-top: 20px;        /* Adiciona um espaço acima, se necessário */
+}
+
+/* Opcional: Adicione estilos ao botão se você quiser que ele tenha mais espaço */
+.checkout-button {
+    /* Seus estilos atuais para o botão */
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
 .cart-card {
     width: 250px;
     height: 300px;
@@ -201,6 +214,13 @@ header ul {
 .cart-card p {
     font-size: 1em;
     font-weight: bold;
+}
+
+button{
+    font-family: 'Poppins', sans-serif;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
 }
 
 /* Rodapé */
