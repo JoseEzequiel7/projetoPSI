@@ -184,7 +184,7 @@ def auto():
     return render_template('auto.html', produtos=produtos)
 
 @app.route('/add_to_cart', methods=['POST'])
-@login_required
+@login_required 
 def add_to_cart():
     product_image = request.form.get('product_image')
     product_description = request.form.get('product_description')

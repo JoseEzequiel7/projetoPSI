@@ -24,7 +24,7 @@ button:hover{
 .box1{
     display: flex;
     align-items: center;
-    height:500px;
+    height:510px;
     width: 400px;
     padding: 10px;
     border-radius: 10px;
@@ -46,18 +46,35 @@ img {
 }
 
 .login{
-    padding: 0%;
-    margin: 0%;
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    min-height: 250px;
+}
+
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.flashes li {
+    color: white;
+    background-color: #FFD700;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 /* Estilizar os botões de input */
 input{
-    height: 20px;
+    height: 30px;
     border-radius: 5px;
-    width: 15vw;
-    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 /* Estilizar as falas antes dos inputs */
@@ -94,17 +111,17 @@ p{
         height: auto;
         padding: 20px;
     }
-    
+
     img {
         height: 80px;
         width: 80px;
     }
-    
+
     input {
         height: 30px;
         width: 90%;
     }
-    
+
     #botao {
         width: 80%;
     }
@@ -117,17 +134,17 @@ p{
         height: auto;
         padding: 15px;
     }
-    
+
     img {
         height: 70px;
         width: 70px;
     }
-    
+
     input {
         height: 28px;
         width: 100%;
     }
-    
+
     #botao {
         width: 90%;
     }
