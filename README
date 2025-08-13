@@ -1,5 +1,5 @@
 PROJETO AORUS - ARTIGOS ESPORTIVOS:
-    A Aorus é uma loja de artigos esportivos desenvolvido com a framework Flask em Python. 
+    A Aorus é uma loja de artigos esportivos desenvolvido com o framework Flask em Python. 
     O projeto inclui funcionalidades essenciais de uma loja virtual, como sistema de autenticação de usuários (cadastro e login), 
     carrinho de compras persistente por sessão e checkout simplificado.
 
