@@ -1,0 +1,40 @@
+PROJETO AORUS - ARTIGOS ESPORTIVOS:
+    A Aorus é uma loja de artigos esportivos desenvolvido com a framework Flask em Python. 
+    O projeto inclui funcionalidades essenciais de uma loja virtual, como sistema de autenticação de usuários (cadastro e login), 
+    carrinho de compras persistente por sessão e checkout simplificado.
+
+TECNOLOGIAS UTILIZADAS:
+    Backend: Python , Flask
+    Banco de Dados: SQLite3
+    Autenticação: flask-login , werkzeug.security
+    Frontend: HTML , CSS
+
+FUNCIONALIDADES:
+    Autenticação de usuários:
+        Cadastro: Permite que novos usuários criem uma conta com validação de email e senha segura (com hash)
+        Login & Logout: Sistema de login e logout funcional para gerenciar sessões de usuários.
+        Restrições de Acesso: Rotas sensíveis (como o carrinho de compras) são protegidas, exigindo que o usuário esteja logado.
+
+    Carrinho de Compras:
+        Adicione produtos ao carrinho a partir das páginas de categoria.
+        Remova produtos do carrinho.
+        O carrinho de compras é persistente por sessão, e para usuários logados, ele é vinculado à conta.
+    
+    Checkout:
+        Funcionalidade de finalizar a compra, que calcula o valor total e "esvazia" o carrinho.
+    
+    Páginas:
+        Home, Dashboard do Usuário, Login, Cadastro, Categorias, Página de produtos e Carrinho.
+
+COMO EXECUTAR O PROJETO:
+    Crie o Ambiente Virtual:
+        python -m venv venv
+
+    Ative o Ambiente Virtual:
+        Em windows: venv\Scripts\Activate
+        Em macOS ou Linux: source venv/bin/Activate
+    
+    Instale os Requisitos: pip install -r requeriments.txt
+
+    Execute a Aplicação: flask run --debug
+
