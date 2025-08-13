@@ -91,14 +91,6 @@ header input {
     align-items: flex-end;
 }
 
-/* Foto do anúncio */
-#foto_anuncio {
-    height: 50px;
-    width: 200px;
-    border-radius: 50px;
-    margin-right: 90px;
-}
-
 /* Ícone do carrinho */
 li img {
     height: 20px;
