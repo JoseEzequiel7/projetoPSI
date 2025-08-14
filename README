@@ -38,3 +38,8 @@ COMO EXECUTAR O PROJETO:
 
     Execute a Aplicação: flask run --debug
 
+FUNÇÕES REALIZADAS PELO GRUPO:
+    Gilvan Ricaom: Banco de Dados e Seleção de imagens dos produtos
+    José Carlos: CSS , Implementação do carrinho (com adição e remoção de produtos) , e Flask-Login
+    José Ezequiel: Implementação Flask das rotas , Cadastro e Login (sem flask-login) e logout e Implementação do checkout
+    Weslley Wender: HTML , Implementação das páginas personalizadas 404 e 500 , Ajuda com o Banco de Dados SQLite3
