@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorias - Aorus</title>
+
+    <link rel="stylesheet" href="{{url_for ('static', filename = 'css/categorias.css')}}">
+
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="a-foto">
+                <img src="{{url_for('static' , filename = 'imagens/imgs/aorussports.png')}}" alt="Logotipo da Aorus">
+            </div>
+            <div class="a-input">
+                <input type="search" placeholder="Buscar produtos, marcas e muito mais...">
+                <nav>
+                    <ul>
+                        <li><a href="{{url_for('index')}}">Página inicial</a></li>
+                        <br>
+                        <li><a href="{{url_for('categorias')}}">Categorias</a></li>
+                        <br>
+                    </ul>
+                </nav>
+            </div>
+            <div class="a-lista">
+                <ul>
+                    {# Verifica se o usuário está autenticado #}
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('dashboard') }}">Olá, {{ current_user.username }}</a></li>
+                    <li><a href="{{ url_for('logout') }}">Sair</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('cadastro') }}">Cadastrar-se</a></li>
+                    <br>
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <br>
+                    {% endif %}
+                    <li><a href="{{ url_for('carrinho') }}"><img src="{{ url_for('static', filename='imagens/imgs/carrinho.png') }}"  width="30"></a></li>
+                </ul>
+            </div>
+        </header>
+        <div class="sidebar">
+            <a href="{{url_for('futebol')}}"> 
+                <div class="cards">
+                    <img src="{{ url_for('static', filename='imagens/imgs/futebol.jpg') }}" alt="">
+                    <p>FUTEBOL</p>
+                </div>
+            </a>
+
+            <a href="{{url_for('basquete')}}"> 
+                <div class="cards">
+                    <img src="{{ url_for('static', filename='imagens/imgs/basquete.jpg') }}" alt="">
+                    <p>BASQUETE</p>
+                </div>
+            </a>
+            <a href="{{url_for('volei')}}"> 
+                <div class="cards">
+                    <img src="{{ url_for('static', filename='imagens/imgs/volei.jpg') }}" alt="">
+                    <p>VÔLEI</p>
+                </div>
+            </a>
+            <a href="{{url_for('ciclismo')}}"> 
+                <div class="cards">
+                    <img src="{{ url_for('static', filename='imagens/imgs/ciclismo.jpg') }}" alt="">
+                    <p>CICLISMO</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="sidebar">
+            <a href="{{url_for('aqua')}}">
+                <div class="cards">
+                    <img src="{{ url_for('static', filename='imagens/imgs/natacao.jpg') }}" alt="">
+                    <p>ESPORTES AQUÁTICOS</p>
+                </div>
+            </a>
+            <a href="{{url_for('tacos')}}"> 
+                <div class="cards">
+                    <img src="{{ url_for('static', filename='imagens/imgs/tacos.jpg') }}" alt="">
+                    <p>ESPORTES COM TACOS</p>
+                </div>
+            </a>
+            <a href="{{url_for('auto')}}"> 
+                <div class="cards">
+                    <img src="{{ url_for('static', filename='imagens/imgs/auto.jpg') }}" alt="">
+                    <p>AUTOMOBILISMO</p>
+                </div>
+            </a>
+
+        </div>
+
+
+        {% include 'footer.html' %}
+
+    </div>
+
+</body>
+</html>
