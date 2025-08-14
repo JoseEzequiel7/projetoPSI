@@ -51,6 +51,7 @@ img {
     flex-direction: column;
     gap: 15px;
     min-height: 250px;
+    align-items: center; 
 }
 
 .flashes {
@@ -61,7 +62,7 @@ img {
 }
 
 .flashes li {
-    color: white;
+    color: black;
     background-color: #FFD700;
     padding: 5px;
     border-radius: 5px;
@@ -69,7 +70,7 @@ img {
 }
 
 input{
-    height: 30px;
+    min-height: 30px;
     border-radius: 5px;
     width: 300px;
     box-sizing: border-box;
