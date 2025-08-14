@@ -26,6 +26,9 @@ FUNCIONALIDADES:
     Páginas:
         Home, Dashboard do Usuário, Login, Cadastro, Categorias, Página de produtos e Carrinho.
 
+    Tratamento de Erros:
+        404 / 500
+
 COMO EXECUTAR O PROJETO:
     Crie o Ambiente Virtual:
         python -m venv env
